@@ -265,7 +265,7 @@ q_t = \mathbf{F'_t} \mathbf{R_t} \mathbf{F_t} + v_t \\
 <div id="filtering-using-discount-factors-to-specify-the-state-variance-covariance-matrices" class="section level4">
 <h4>Filtering using discount factors to specify the state variance-covariance matrices</h4>
 <blockquote>
-<p>Here we will assume that the observation variances and covariances are known and we will use discount factors to specify the unknown state variance-covaraince matrices.</p>
+<p>Here we will assume that the observation variances and covariances are known and we will use discount factors to specify the unknown state variance-covariance matrices.</p>
 </blockquote>
 <blockquote>
 <p>The state covariance plays a role in determining how the state transitions from time <span class="math inline">\(t-1\)</span> to time <span class="math inline">\(t\)</span>. Large variances imply that significant information about the previous state is lost during the transition. So we can think of <span class="math inline">\(\mathbf{W_t}\)</span> as the amount of information lost transitioning from <span class="math inline">\(\mathbf{\Theta_{t-1}}\)</span> to <span class="math inline">\(\mathbf{\Theta_t}\)</span>. Recall step one of the Kalman filter. We know the prior variance of the state vector at time <span class="math inline">\(t\)</span> is <span class="math inline">\(\mathbf{R_t} = \mathbf{G_t} \mathbf{C_{t-1}} \mathbf{G^{'}_t} + \mathbf{W_t} = \mathbf{P_t} + \mathbf{W_t}\)</span>. If <span class="math inline">\(\mathbf{W_t}\)</span> was completely zero, as in no information is lost, then <span class="math inline">\(\mathbf{P_t}\)</span> would be prior variance of the state vector. So, in theory, keeping only a certain percentage of information from <span class="math inline">\(\mathbf{P_t}\)</span> show have a similar effect as adding a nonzero <span class="math inline">\(\mathbf{W_t}\)</span>. This is the main idea behind discount factors, we will update <span class="math inline">\(\mathbf{W_t}\)</span> by discounting <span class="math inline">\(\mathbf{P_t}\)</span>. We assume that <span class="math inline">\(\mathbf{R_t} = \mathbf{P_t}/ \delta\)</span> where <span class="math inline">\(\delta \in (0, 1]\)</span> is the discount factor. We can solve for <span class="math inline">\(\mathbf{W_t}\)</span> and see that <span class="math inline">\(\mathbf{W_t} = \frac{(1-\delta)}{\delta} \mathbf{P_t}\)</span>. So now we can replace step one in our filtering equations above with the following.</p>
@@ -292,7 +292,7 @@ q_t = \mathbf{F'_t} \mathbf{R_t} \mathbf{F_t} + v_t \\
 <div id="filtering-with-unknown-fixed-observation-variance-covariance-matrix" class="section level4">
 <h4>Filtering with unknown fixed observation variance-covariance matrix</h4>
 <blockquote>
-If we assume the state covariance matrices are known (or we specify them using discount factors) and that the observation covariance matrix is fixed through time then we can assign an inverse wishart prior to the observation covariance matrix and sequentially update its posterior distribution each time we recieve an observation. As in Prado and Wes, let <span class="math inline">\(\mathbf{V} = \mathbf{\Sigma}\)</span> in order to make clear that the observation covariance matrix is unknown (statisticians like to use Greek letters for unknown parameters). So our model is,<br />
+If we assume the state covariance matrices are known (or we specify them using discount factors) and that the observation covariance matrix is fixed through time then we can assign an inverse wishart prior to the observation covariance matrix and sequentially update its posterior distribution each time we receive an observation. As in Prado and Wes, let <span class="math inline">\(\mathbf{V} = \mathbf{\Sigma}\)</span> in order to make clear that the observation covariance matrix is unknown (statisticians like to use Greek letters for unknown parameters). So our model is,<br />
 
 <span class="math display">\[\begin{align}
 \mathbf{y'_t} &amp;= \mathbf{F'_t} \mathbf{ \Theta_t} + \mathbf{\nu'_t} \hspace{1cm} \mathbf{\nu_t} \sim N(0, v_t \mathbf{\Sigma}) \\
@@ -300,13 +300,13 @@ If we assume the state covariance matrices are known (or we specify them using d
 \end{align}\]</span>
 </blockquote>
 <blockquote>
-The discuss below follows along with Section 10.3 of Time Series Modeling, Computation, and Inference (Prado and West, 2010). To allow for conugate inference we can assign a matrix normal inverse Wishart (NIW) prior for the state vector and observation covariance matrix.<br />
+The discuss below follows along with Section 10.3 of Time Series Modeling, Computation, and Inference (Prado and West, 2010). To allow for conjugate inference we can assign a matrix normal inverse Wishart (NIW) prior for the state vector and observation covariance matrix.<br />
 
 <span class="math display">\[\begin{align}
 [ \mathbf{\Theta_0}, \mathbf{\Sigma} ] \sim NIW(\mathbf{m_0}, \mathbf{C_0}, \eta_0, \mathbf{D_0})
 \end{align}\]</span>
 <p>This implies a marginal inverse-Wishart prior for <span class="math inline">\(\mathbf{\Sigma}\)</span>, <span class="math inline">\(\mathbf{\Sigma} \sim IW(\eta_0, \mathbf{D_0})\)</span>. If you are in the univariate case then this prior is simply an inverse-gamma distribution and the joint prior is Normal-inverse-gamma (see Section 4.3.2 of West and Prado).<br />
-Now each time we recieve a new observation we want to update the joint posterior at time <span class="math inline">\(t-1\)</span>, <span class="math inline">\([ \mathbf{\Theta_{t-1}}, \mathbf{\Sigma} | \mathbf{y_{1:t-1}}]\)</span>, to the joint posterior at time <span class="math inline">\(t\)</span>, <span class="math inline">\([ \mathbf{\Theta_{t}}, \mathbf{\Sigma} | \mathbf{y_{1:t}}]\)</span>. We can do so by following the three steps below.</p>
+Now each time we receive a new observation we want to update the joint posterior at time <span class="math inline">\(t-1\)</span>, <span class="math inline">\([ \mathbf{\Theta_{t-1}}, \mathbf{\Sigma} | \mathbf{y_{1:t-1}}]\)</span>, to the joint posterior at time <span class="math inline">\(t\)</span>, <span class="math inline">\([ \mathbf{\Theta_{t}}, \mathbf{\Sigma} | \mathbf{y_{1:t}}]\)</span>. We can do so by following the three steps below.</p>
 </blockquote>
 <blockquote>
 <ul>
@@ -341,7 +341,7 @@ q_t &amp;= \mathbf{F'_t} \mathbf{R_t} \mathbf{F_t} + v_t \hspace{1cm} \mathbf{S_
 <div id="smoothing" class="section level4">
 <h4>Smoothing</h4>
 <blockquote>
-<p>Up to this point we have only discussed estimating the most current state at time <span class="math inline">\(T\)</span>, <span class="math inline">\(\mathbf{\Theta_T}\)</span>, given all available observations. For every state before time <span class="math inline">\(T\)</span> we have gained new observations since we intially estimated them. What if we want to go back and update the estimates of these previous states, <span class="math inline">\(\mathbf{\Theta_{0:s}}\)</span>, for some <span class="math inline">\(s \le T\)</span> given all of available observations (including the observations we gained after intially estimating that state)? We can go back and “smooth” the state estimates by using simulation:</p>
+<p>Up to this point we have only discussed estimating the most current state at time <span class="math inline">\(T\)</span>, <span class="math inline">\(\mathbf{\Theta_T}\)</span>, given all available observations. For every state before time <span class="math inline">\(T\)</span> we have gained new observations since we initially estimated them. What if we want to go back and update the estimates of these previous states, <span class="math inline">\(\mathbf{\Theta_{0:s}}\)</span>, for some <span class="math inline">\(s \le T\)</span> given all of available observations (including the observations we gained after initially estimating that state)? We can go back and “smooth” the state estimates by using simulation:</p>
 </blockquote>
 <blockquote>
 <ul>
@@ -378,9 +378,8 @@ q_t &amp;= \mathbf{F'_t} \mathbf{R_t} \mathbf{F_t} + v_t \hspace{1cm} \mathbf{S_
 </ul>
 </blockquote>
 <blockquote>
-<p>In both smoothing and k step ahead forecasting we are simply drawing an observation covariance matrix <span class="math inline">\(\mathbf{\Sigma}\)</span> from it’s most current marginal posterior distrbution then stepping through the recursive DLM observation and state equations. Essentially, given all these observations and this observation covariance matrix <span class="math inline">\(\mathbf{\Sigma}\)</span> how would this system behave?</p>
+<p>In both smoothing and k step ahead forecasting we are simply drawing an observation covariance matrix <span class="math inline">\(\mathbf{\Sigma}\)</span> from it’s most current marginal posterior distribution then stepping through the recursive DLM observation and state equations. Essentially, given all these observations and this observation covariance matrix <span class="math inline">\(\mathbf{\Sigma}\)</span> how would this system behave?</p>
 </blockquote>
-<pre><code>\end{align} </code></pre>
 </div>
 </div>
 
