@@ -364,7 +364,7 @@ q_t &amp;= \mathbf{F'_t} \mathbf{R_t} \mathbf{F_t} + v_t \hspace{1cm} \mathbf{S_
 <div id="forecasting-k-steps-ahead" class="section level4">
 <h4>Forecasting k steps ahead</h4>
 <blockquote>
-<p>Notice that in step two of the filtering recursions described above one-step-ahead forecast are produced so if you are only interested in forecasting one-step-ahead the forecasts are already there for you! For forecasts longer than one-step ahead we can use simulation. You can use the same approach used when smoothing except this time you will simulate forward in time rather than backward in time.</p>
+<p>Notice that in step two of the filtering recursions described above one-step-ahead forecasts are produced so if you are only interested in forecasting one-step-ahead the forecasts are already there for you! For forecasts longer than one-step ahead we can use simulation. You can use the same approach used when smoothing except this time you will simulate forward in time rather than backward in time.</p>
 </blockquote>
 <blockquote>
 <ul>
@@ -374,11 +374,15 @@ q_t &amp;= \mathbf{F'_t} \mathbf{R_t} \mathbf{F_t} + v_t \hspace{1cm} \mathbf{S_
 \mathbf{\Theta_t} &amp;\sim N(\mathbf{G_t \Theta_{t-1}}, \mathbf{W_t}, \mathbf{\Sigma})
 \end{align}\]</span></li>
 <li>Then for <span class="math inline">\(h=1, 2, \dots, k\)</span> iteratively draw samples from<br />
-\begin{align}  N(, , ) \  N( , v_{t+k} )</li>
+
+<span class="math display">\[\begin{align}  
+\mathbf{\Theta_{t+h}} \sim N(\mathbf{G_{t+h} \Theta_{t+h-1}}, \mathbf{W_T}, \mathbf{\Sigma}) \\
+\mathbf{y_{t+h}} \sim N(\mathbf{\Theta'_{t+h}} \mathbf{F_{t+h}}, v_{t+k} \mathbf{\Sigma})
+\end{align}\]</span></li>
 </ul>
 </blockquote>
 <blockquote>
-<p>In both smoothing and k step ahead forecasting we are simply drawing an observation covariance matrix <span class="math inline">\(\mathbf{\Sigma}\)</span> from it’s most current marginal posterior distribution then stepping through the recursive DLM observation and state equations. Essentially, given all these observations and this observation covariance matrix <span class="math inline">\(\mathbf{\Sigma}\)</span> how would this system behave?</p>
+<p>In both smoothing and k step ahead forecasting we are simply drawing an observation covariance matrix <span class="math inline">\(\mathbf{\Sigma}\)</span> from it’s most current marginal posterior distribution then stepping through the recursive DLM observation and state equations. Essentially, given all these observations and this observation covariance matrix <span class="math inline">\(\mathbf{\Sigma}\)</span> how would this system behave.</p>
 </blockquote>
 </div>
 </div>
