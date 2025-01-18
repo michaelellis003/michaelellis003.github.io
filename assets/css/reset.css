@@ -1,0 +1,46 @@
+/* reset.css - Basic reset and variables */
+
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  /* Global variables */
+  :root {
+    /* Colors */
+    --color-background: #f6f8fa;
+    --color-white: #ffffff;
+    --color-border: #d0d7de;
+    --color-text: #24292f;
+    --color-text-secondary: #57606a;
+    --color-link: #0969da;
+    
+    /* Spacing and sizing */
+    --spacing: 16px;
+    --sidebar-width: 296px;
+    
+    /* Typography */
+    --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, 
+                   sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+  }
+  
+  /* Base styles */
+  body {
+    font-family: var(--font-family);
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--color-text);
+    background-color: var(--color-background);
+  }
+  
+  /* Global link styles */
+  a {
+    color: var(--color-link);
+    text-decoration: none;
+  }
+  
+  a:hover {
+    text-decoration: underline;
+  }

@@ -1,0 +1,159 @@
+/* Timeline structure */
+.timeline-container {
+    position: relative;
+    max-width: 900px;
+    margin: 0 auto;
+    padding-left: 48px; /* Space for timeline */
+}
+
+/* Vertical timeline line */
+.timeline-container::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background-color: #e5e7eb;
+}
+
+/* Timeline entry wrapper */
+.timeline-entry {
+    position: relative;
+    margin-bottom: 2rem;
+}
+
+/* Timeline dot */
+.timeline-dot {
+    position: absolute;
+    left: -52.5px;
+    top: 50%; /* Center vertically */
+    transform: translateY(-50%); /* Perfect centering */
+    width: 16px;
+    height: 16px;
+    background: #2563eb;
+    border: 2px solid white;
+    border-radius: 50%;
+    z-index: 1;
+}
+
+/* Horizontal connecting line */
+.timeline-dot::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 100%;
+    width: 36px; /* Length of connecting line */
+    height: 2px;
+    background-color: #e5e7eb;
+    transform: translateY(-50%);
+}
+
+/* Preserve your existing card styles */
+.experience-card {
+    background: white;
+    border-radius: 12px;
+    padding: 1.5rem;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease;
+}
+
+.experience-card:hover {
+    transform: translateX(8px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+/* Keep your existing header styles */
+.experience-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+}
+
+.experience-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #2563eb;
+}
+
+.experience-company {
+    color: #4b5563;
+}
+
+.experience-date {
+    color: #6b7280;
+    font-size: 0.9rem;
+    white-space: nowrap;
+    padding-left: 1.5rem;
+}
+
+/* Current position styles */
+.timeline-entry.current .timeline-dot {
+    background: #2563eb;
+    border-color: white;
+    box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.2);
+}
+
+.timeline-entry.current .experience-card {
+    border-left: 3px solid #2563eb;
+}
+
+.experience-card ul {
+    list-style: none;
+    padding: 0;
+    margin: 0.75rem 0;
+}
+
+.experience-card li {
+    position: relative;
+    padding-left: 1.5rem;
+    margin-bottom: 0.875rem;
+    line-height: 1.6;
+    color: #4b5563;
+}
+
+/* Custom bullet style using small right arrow */
+.experience-card li::before {
+    content: '▹';  /* Right-pointing triangle */
+    position: absolute;
+    left: 0;
+    top: 0; /* Aligns with text */
+    color: #2563eb;
+    opacity: 0.8;
+    font-size: 0.875rem;
+    transition: all 0.2s ease;
+}
+
+/* Hover effect */
+.experience-card li:hover::before {
+    opacity: 1;
+    transform: translateX(2px);
+}
+
+/* Last item */
+.experience-card li:last-child {
+    margin-bottom: 0;
+}
+
+/* Optional: Add emphasis to key terms */
+.experience-card li strong {
+    color: #1e40af;
+    font-weight: 500;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .timeline-container {
+        padding-left: 32px;
+    }
+    
+    .timeline-dot {
+        left: -32px;
+    }
+    
+    .timeline-dot::after {
+        width: 24px;
+    }
+}

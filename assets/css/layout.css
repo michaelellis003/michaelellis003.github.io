@@ -1,0 +1,42 @@
+/* layout.css - Core layout styles */
+
+/* Main layout structure */
+.page-wrapper {
+  max-width: 1440px;  /* Increased from 1280px */
+  margin: 0 auto;     /* This centers the wrapper */
+  padding: 48px;      /* Increased padding for better spacing */
+  min-height: 100vh;  /* Makes wrapper take full viewport height */
+}
+
+.content {
+  width: 100%;
+  max-width: 85%;  /* Changed from fixed px to percentage of page wrapper */
+  margin: 0 auto;
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  padding: 32px;
+}
+
+/* Responsive layout */
+@media (max-width: 768px) {
+  .page-wrapper {
+    flex-direction: column;
+    padding: 16px;
+  }
+}
+
+/* Print layout */
+@media print {
+  body {
+    background: white;
+  }
+
+  .page-wrapper {
+    padding: 0;
+  }
+
+  .content {
+    border: none;
+  }
+}
